@@ -1,0 +1,51 @@
+id,titulo,autor,precio,idEditorial
+1,Poema de Gilgamesh,Anonimo,5932,5
+2,Libro de Job (de la Biblia),Anonimo,1894,3
+3,Las mil y una noches,Anonimo,3056,2
+4,Saga de Njal,Anonimo,1528,5
+5,Todo se desmorona,Chinua Achebe,6149,4
+6,Cuentos infantiles,Hans Christian Andersen,5242,2
+7,Divina comedia,Dante Alighieri,3987,1
+8,Orgullo y prejuicio,Jane Austen,5203,4
+9,Papa Goriot,Honore de Balzac,5489,5
+10,Molloy,Samuel Beckett,4497,4
+11,Decameron,Giovanni Boccaccio,5082,2
+12,Ficciones,Jorge Luis Borges,3086,1
+13,Cumbres Borrascosas,Emily Bronte,5239,5
+14,El extranjero,Albert Camus,4432,1
+15,Poemas,Paul Celan,6011,5
+16,Viaje al fin de la noche,Louis-Ferdinand Celine,1902,2
+17,Don Quijote de la Mancha,Miguel de Cervantes,1333,1
+18,Los cuentos de Canterbury,Geoffrey Chaucer,884,4
+19,Relatos cortos,Anton Chejov,3696,2
+20,Nostromo,Joseph Conrad,4407,4
+21,Grandes Esperanzas,Charles Dickens,6731,1
+22,Jacques el fatalista,Denis Diderot,5732,2
+23,Berlin Alexanderplatz,Alfred Doblin,4172,4
+24,Crimen y castigo,Fiodor Dostoievski,4731,2
+25,El idiota,Fiodor Dostoievski,5408,1
+26,Los endemoniados,Fiodor Dostoievski,861,2
+27,Los hermanos Karamazov,Fiodor Dostoievski,6248,1
+28,Middlemarch,George Eliot,1955,4
+29,El hombre invisible,Ralph Ellison,875,5
+30,Medea,Euripides,1890,4
+31,Absalom Absalom!,William Faulkner,2615,2
+32,El ruido y la furia,William Faulkner,5557,1
+33,Madame Bovary,Gustave Flaubert,4951,5
+34,La educacion sentimental,Gustave Flaubert,2418,4
+35,Romancero gitano,Federico Garcia Lorca,894,2
+36,Cien anos de soledad,Gabriel Garcia Marquez,5728,4
+37,El amor en los tiempos del colera,Gabriel Garcia Marquez,6770,1
+38,Fausto,Johann Wolfgang von Goethe,5511,2
+39,Almas muertas,Nikolai Gogol,1112,4
+40,El tambor de hojalata,Gunter Grass,6788,2
+41,Gran Serton: Veredas,Joao Guimaraes Rosa,2020,1
+42,Hambre,Knut Hamsun,5167,2
+43,El viejo y el mar,Ernest Hemingway,977,1
+44,Iliada,Homero,5667,4
+45,Odisea,Homero,3462,5
+46,Casa de munecas,Henrik Ibsen,834,2
+47,Ulises,James Joyce,1101,4
+48,Relatos cortos,Franz Kafka,1410,1
+49,El proceso,Franz Kafka,5368,2
+50,El castillo,Franz Kafka,3688,2
