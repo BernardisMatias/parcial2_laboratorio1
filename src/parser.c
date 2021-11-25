@@ -60,11 +60,10 @@ int parser_EditorialFromText(FILE* pFile , LinkedList* pArrayListEditorial){
 }
 
 
-int parser_OneBookFromText(FILE* pFile)
+int parser_leerIdLibro(FILE* pFile)
 {
 	char idBook[128];
 	int retorno = -1;
-
 	if(pFile != NULL){
 		fscanf(pFile, "%[^\n]\n", idBook);
 		while(!feof(pFile)){
@@ -72,7 +71,6 @@ int parser_OneBookFromText(FILE* pFile)
 			retorno = atoi(idBook);
 		}
 	}
-
     return retorno;
 }
 

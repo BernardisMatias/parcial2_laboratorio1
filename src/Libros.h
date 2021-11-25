@@ -27,5 +27,5 @@ int libro_setPrecio(eLibro* this,float precio);
 int libro_getPrecio(eLibro* this,float* precio);
 int libro_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial);
 int libro_sortByAutor(void* firstBook, void* secondBook);
-int libro_checkAddElementToArray(void* auxElement);
+int libro_elementIsMinotauro(void* auxElement);
 #endif

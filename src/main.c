@@ -12,7 +12,8 @@ int main(void) {
 	int opcion;
 	int cargoLibros = 0;
 	int cargoEditoriales = 0;
-	char fileName[255];
+	char fileNameLibro[255];
+	char fileNameEditorial[255];
 	LinkedList* listaLibros = ll_newLinkedList();
 	LinkedList* listaEditoriales = ll_newLinkedList();
 	do{
@@ -26,8 +27,8 @@ int main(void) {
 		GetEntero(&opcion, "Ingrese una opcion: ", 1, 6, 20);
 		switch(opcion){
 			case 1:
-				if(GetString(fileName, "Ingrese el nombre del archivo .csv: ", "Error. Libro invalido.", 255, 5) == 0){
-					if(controller_loadBooksFromFile(listaLibros, fileName) == 0){
+				if(GetString(fileNameLibro, "Ingrese el nombre del archivo .csv: ", "Error. Libro invalido.", 255, 5) == 0){
+					if(controller_loadLibrosFromFile(listaLibros, fileNameLibro) == 0){
 						cargoLibros = 1;
 						printf("\nLista de LIBROS cargada con exito.");
 					}
@@ -36,8 +37,9 @@ int main(void) {
 				}
 			break;
 			case 2:
-				if(GetString(fileName, "Ingrese el nombre del archivo .csv: ", "Error. Editorial invalida.", 255, 5) == 0){
-					if(controller_loadEditorialsFromFile(listaEditoriales, fileName) == 0){
+				fflush(stdin);
+				if(GetString(fileNameEditorial, "Ingrese el nombre del archivo .csv: ", "Error. Editorial invalida.", 255, 5) == 0){
+					if(controller_loadEditorialsFromFile(listaEditoriales, fileNameEditorial) == 0){
 						cargoEditoriales = 1;
 						printf("\nLista de EDITORIALES cargada con exito.");
 					}
@@ -59,7 +61,7 @@ int main(void) {
 			case 4:
 				if(cargoLibros == 1){
 						if(cargoEditoriales == 1){
-							if(controller_ListBooks(listaLibros, listaEditoriales) != 0){
+							if(controller_listLibros(listaLibros, listaEditoriales) != 0){
 								printf("\nError ordenando lista de libros.");
 							}
 						}else{
@@ -70,7 +72,7 @@ int main(void) {
 				}
 			break;
 			case 5:
-				if(controller_listBooksFromEditorialMinotauro(listaLibros, listaEditoriales)!=0){
+				if(controller_listarLibrosMinotauro(listaLibros, listaEditoriales)!=0){
 					printf("\nOcurrio un error al filtrar por editorial MINOTAURO.");
 				}
 			break;
@@ -79,5 +81,5 @@ int main(void) {
 				break;
 		}
 
-	}while(opcion != 6 && opcion != -1);
+	}while(opcion != 6);
 }

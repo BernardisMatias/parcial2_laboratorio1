@@ -163,7 +163,7 @@ int libro_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial){
 	int retorno = -1;
 	if(pArrayBook != NULL){
 		if(ll_sort(pArrayBook, libro_sortByAutor, 1)==0){
-			if(controller_ListBooks(pArrayBook, pArrayEditorial) == 0){
+			if(controller_listLibros(pArrayBook, pArrayEditorial) == 0){
 				printf("\nLista Ordenada con exito por AUTOR");
 				retorno = 0;
 			}
@@ -191,12 +191,11 @@ int libro_sortByAutor(void* firstBook, void* secondBook){
 }
 
 
-int libro_checkAddElementToArray(void* auxElement){
-	eLibro* aux;
-	int retorno = -1;
-	aux = auxElement;
-	if(aux -> idEditorial == 4){
-		retorno = 0;
+int libro_elementIsMinotauro(void* auxElement){
+	int result = -1;
+	eLibro* aux = auxElement;
+	if(aux->idEditorial == 4){
+		result = 0;
 	}
-	return retorno;
+	return result;
 }

@@ -15,16 +15,16 @@
  * \return int
  *
  */
-int controller_loadBooksFromText(char* path , LinkedList* pArrayListBook){
-	FILE* pFile;
+int controller_loadLibrosFromText(char* path , LinkedList* pArrayListBook){
+	FILE* fileAux;
 	int result = -1;
-	pFile = fopen(path, "r");
-	if(pFile != NULL){
-		result = parser_LibroFromText(pFile, pArrayListBook);
+	fileAux = fopen(path, "r");
+	if(fileAux != NULL){
+		result = parser_LibroFromText(fileAux, pArrayListBook);
 	} else{
 		printf("\nError abriendo el archivo");
 	}
-	fclose(pFile);
+	fclose(fileAux);
     return result;
 }
 
@@ -36,25 +36,27 @@ int controller_loadBooksFromText(char* path , LinkedList* pArrayListBook){
  *
  */
 int controller_loadEditorialsFromText(char* path , LinkedList* pArrayListEditorial){
-	FILE* pFile;
+	FILE* fileAux;
 	int result = -1;
-	pFile = fopen(path, "r");
-	if(pFile != NULL){
-		result = parser_EditorialFromText(pFile, pArrayListEditorial);
+	fileAux = fopen(path, "r");
+	if(fileAux != NULL){
+		result = parser_EditorialFromText(fileAux, pArrayListEditorial);
+	} else {
+		printf("\nError abriendo");
 	}
-	fclose(pFile);
+	fclose(fileAux);
     return result;
 }
 
 
-int controller_loadBooksFromFile(LinkedList* pArrayListBook ,char* fileName){
+int controller_loadLibrosFromFile(LinkedList* pArrayListBook ,char* fileName){
 	int result = -1;
 	ll_clear(pArrayListBook);
 	char fullFileName[] = "src/";
 	char extension[] = ".csv";
 	strcat(fullFileName, fileName);
 	strcat(fullFileName, extension);
-	if(controller_loadBooksFromText(fullFileName, pArrayListBook) == 0){
+	if(controller_loadLibrosFromText(fullFileName, pArrayListBook) == 0){
 		result = 0;
 	}
 	return result;
@@ -82,7 +84,7 @@ int controller_loadEditorialsFromFile(LinkedList* listaEditoriales, char* fileNa
  * \return int
  *
  */
-int controller_addBook(LinkedList* pArrayListBook)
+int controller_addLibro(LinkedList* pArrayListBook)
 {
 	eLibro* aux;
 	int retorno = -1;
@@ -93,7 +95,7 @@ int controller_addBook(LinkedList* pArrayListBook)
 	int idEditorial;
 
 	aux = libro_new();
-	id = controller_calculateId(pArrayListBook);
+	id = controller_obtenerLibroId(pArrayListBook);
 
 	if(pArrayListBook != NULL){
 		GetString(titulo, "Ingrese el titulo del libro: ", "Error. Titulo invalido. Reingrese", 255, 5);
@@ -123,7 +125,7 @@ int controller_addBook(LinkedList* pArrayListBook)
  * \return int
  *
  */
-int controller_ListBooks(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial){
+int controller_listLibros(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial){
 	eLibro* pBook;
     int retorno = -1;
     int idLibroObtenido;
@@ -224,18 +226,14 @@ int controller_saveBookAsText(char* path , LinkedList* pArrayListBook)
  * \return int
  *
  */
-int controller_loadLastBookIdFromText(char* path)
-{
+int controller_loadLastBookIdFromText(char* path){
 	FILE* pFile;
 	int retorno = -1;
 	pFile = fopen(path, "r");
-
 	if(pFile != NULL){
-		retorno = parser_OneBookFromText(pFile);
-		printf("EL ID CARGADO POR ULTIMO ES, %d\n", retorno);
+		retorno = parser_leerIdLibro(pFile);
 	}
 	fclose(pFile);
-
     return retorno;
 }
 
@@ -256,14 +254,12 @@ int controller_saveLastBookAsText(char* path, int id){
 	return retorno;
 }
 
-//devuelve el id generado, o -1
-int controller_calculateId(LinkedList* pArrayListBook){
+int controller_obtenerLibroId(LinkedList* pArrayListBook){
 	eLibro* book;
 	int idLibro;
 	int idMax = -1;
 	int flagFirstBook = 1;
 	int foundedId;
-
 	if(pArrayListBook != NULL){
 		if(ll_len(pArrayListBook) > 0){
 			for(int i = 0; i < ll_len(pArrayListBook);i++){
@@ -279,7 +275,6 @@ int controller_calculateId(LinkedList* pArrayListBook){
 			}
 		}
 	}
-
 	foundedId = controller_loadLastBookIdFromText("ultimoIdLibros.csv");
 
 	if(idMax < foundedId){
@@ -288,17 +283,15 @@ int controller_calculateId(LinkedList* pArrayListBook){
 	return idMax;
 }
 
-int controller_listBooksFromEditorialMinotauro(LinkedList* bookList, LinkedList* pArrayEditorial){
+int controller_listarLibrosMinotauro(LinkedList* listaLibros, LinkedList* pArrayEditorial){
 
-	LinkedList* subList;
+	int result = -1;
+	LinkedList* listaAux;
 
-	int retorno = -1;
-
-	subList = ll_newLinkedList();
-
-	subList = ll_filter(bookList, libro_checkAddElementToArray);
-	if(subList != NULL){
-		retorno = controller_ListBooks(subList,pArrayEditorial);
+	listaAux = ll_newLinkedList();
+	listaAux = ll_filter(listaLibros, libro_elementIsMinotauro);
+	if(listaAux != NULL){
+		result = controller_listLibros(listaAux, pArrayEditorial);
 	}
-	return retorno;
+	return result;
 }

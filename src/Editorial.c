@@ -9,14 +9,12 @@ eEditorial* editorial_new(){
 	return nuevaEditorial;
 }
 
-eEditorial* editorial_newParametros(char* idEditorialStr,char* nombreStr){
+eEditorial* editorial_newParametros(char* idEditorial,char* nombre){
 	int idEditorialAux;
 	eEditorial* editorial = editorial_new();
-	idEditorialAux = atoi(idEditorialStr);
-	if(editorial != NULL && idEditorialStr != NULL && nombreStr != NULL){
-		editorial_setId(editorial, idEditorialAux);
-		editorial_setNombre(editorial, nombreStr);
-	}
+	idEditorialAux = atoi(idEditorial);
+	editorial_setId(editorial, idEditorialAux);
+	editorial_setNombre(editorial, nombre);
 	return editorial;
 }
 
