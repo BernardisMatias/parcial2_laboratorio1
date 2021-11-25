@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "LinkedList.h"
+#include "Libros.h"
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
@@ -478,9 +479,7 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 	void* pElement;
 	int i;
 	listAux = ll_newLinkedList();
-
 	if(this != NULL && listAux != NULL){
-
 		for(i=0;i<ll_len(this);i++){
 			pElement = ll_get(this, i);
 			if(pElement !=NULL && fn(pElement) != -1){
@@ -492,6 +491,35 @@ LinkedList* ll_filter(LinkedList* this, int (*fn)(void* element)){
 			}
 		}
 
+	}
+	return listAux;
+}
+
+LinkedList* ll_map(LinkedList* this, int (*fn)(void* element)){
+	LinkedList* listAux;
+	void* pElement;
+	int i;
+	listAux = ll_newLinkedList();
+	if(this != NULL && listAux != NULL){
+		for(i=0;i<ll_len(this);i++){
+			pElement = ll_get(this, i);
+			if(pElement != NULL){
+				if(fn(pElement) == 1){
+					eLibro* aux = pElement;
+					if(aux->precio >= 300){
+						aux->precio = aux->precio * 0.8;
+					}
+				} else if(fn(pElement) == 2){
+					eLibro* aux = pElement;
+					if(aux->precio <= 200){
+						aux->precio = aux->precio * 0.9;
+					}
+				}
+				if(ll_add(listAux, pElement) != 0){ //error
+					printf("\nERROR AGREGANDO");
+				}
+			}
+		}
 	}
 	return listAux;
 }

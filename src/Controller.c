@@ -126,29 +126,28 @@ int controller_addLibro(LinkedList* pArrayListBook)
  *
  */
 int controller_listLibros(LinkedList* pArrayListBook, LinkedList* pArrayListEditorial){
-	eLibro* pBook;
+	eLibro* aux;
     int retorno = -1;
-    int idLibroObtenido;
-    float precioObtenido;
-    char autorObtenido[128];
-    char tituloObtenido[128];
-    int idEditorialObtenido;
-    char editorialDefinida[128];
+    int idLibro;
+    char autor[255];
+    char titulo[255];
+    float precio;
+    int idEditorial;
+    char editorial[128];
     if(pArrayListBook != NULL){
         puts("ID\t\t\t\tTITULO\t\t\t\tAUTOR\t\tPRECIO\t\t\tEDITORIAL");
         retorno = 0;
         for(int i = 0; i< ll_len(pArrayListBook); i++){
-        	pBook = ll_get(pArrayListBook, i);
-        	if(pBook != NULL){
-            	libro_getId(pBook, &idLibroObtenido);
-            	libro_getTitulo(pBook, tituloObtenido);
-            	libro_getAutor(pBook, autorObtenido);
-            	libro_getPrecio(pBook, &precioObtenido);
-            	libro_getIdEditorial(pBook, &idEditorialObtenido);
+        	aux = ll_get(pArrayListBook, i);
+        	if(aux != NULL){
+            	libro_getId(aux, &idLibro);
+            	libro_getTitulo(aux, titulo);
+            	libro_getAutor(aux, autor);
+            	libro_getPrecio(aux, &precio);
+            	libro_getIdEditorial(aux, &idEditorial);
+            	editorial_getEditorialNameById(pArrayListEditorial, idEditorial, editorial);
 
-            	editorial_getEditorialNameById(pArrayListEditorial, idEditorialObtenido, editorialDefinida);
-
-            	printf("%2d %35s %30s %15.2f$ %26s\n", idLibroObtenido, tituloObtenido, autorObtenido, precioObtenido, editorialDefinida);
+            	printf("%2d %35s %30s %15.2f$ %26s\n", idLibro, titulo, autor, precio, editorial);
         	}
 
         }
@@ -292,6 +291,19 @@ int controller_listarLibrosMinotauro(LinkedList* listaLibros, LinkedList* pArray
 	listaAux = ll_filter(listaLibros, libro_elementIsMinotauro);
 	if(listaAux != NULL){
 		result = controller_listLibros(listaAux, pArrayEditorial);
+	}
+	return result;
+}
+
+int controller_aplicarDescuento(LinkedList* listaLibros, LinkedList* pArrayEditorial){
+	int result = -1;
+	LinkedList* listaAux;
+	listaAux = ll_newLinkedList();
+	listaAux = ll_map(listaLibros, libro_elementIsPlanetaOrXXI);
+
+	if(listaAux != NULL){
+		result = controller_listLibros(listaAux, pArrayEditorial);
+		parser_saveNewList(listaLibros, pArrayEditorial);
 	}
 	return result;
 }

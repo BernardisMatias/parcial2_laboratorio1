@@ -14,3 +14,4 @@ int controller_loadEditorialsFromText(char* path , LinkedList* pArrayListEditori
 int controller_loadEditorialsFromFile(LinkedList* listaEditoriales, char* fileName);
 
 int controller_listarLibrosMinotauro(LinkedList* listaLibros, LinkedList* pArrayEditorial);
+int controller_aplicarDescuento(LinkedList* listaLibros, LinkedList* pArrayEditorial);

@@ -23,8 +23,9 @@ int main(void) {
 		printf("\n 3. Ordenar lista de LIBROS por AUTOR");
 		printf("\n 4. Imprimir lista de LIBROS");
 		printf("\n 5. Mostrar Libros con editorial MINOTAURO");
-		printf("\n 6. Salir\n");
-		GetEntero(&opcion, "Ingrese una opcion: ", 1, 6, 20);
+		printf("\n 6. Aplicar DESCUENTOS.");
+		printf("\n 7. Salir\n");
+		GetEntero(&opcion, "Ingrese una opcion: ", 1, 7, 20);
 		switch(opcion){
 			case 1:
 				if(GetString(fileNameLibro, "Ingrese el nombre del archivo .csv: ", "Error. Libro invalido.", 255, 5) == 0){
@@ -76,10 +77,15 @@ int main(void) {
 					printf("\nOcurrio un error al filtrar por editorial MINOTAURO.");
 				}
 			break;
+			case 6:
+				if(controller_aplicarDescuento(listaLibros, listaEditoriales)!=0){
+					printf("\nOcurrio un error al mapear DESCUENTOS");
+				}
+			break;
 			default:
 				printf("\nError. Opcion ingresada invalida");
 				break;
 		}
 
-	}while(opcion != 6);
+	}while(opcion != 7);
 }

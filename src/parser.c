@@ -74,6 +74,36 @@ int parser_leerIdLibro(FILE* pFile)
     return retorno;
 }
 
+
+void parser_saveNewList(LinkedList* pListaLibros, LinkedList* pArrayListEditorial){
+	FILE* pFile;
+	eLibro* aux;
+	 int idLibro;
+	char autor[255];
+	char titulo[255];
+	float precio;
+	int idEditorial;
+	char editorial[128];
+	pFile = fopen("lista_actualizada.csv", "w");
+	if(pFile != NULL){
+		for(int i=0;i<ll_len(pListaLibros);i++){
+			aux = ll_get(pListaLibros, i);
+			if(ll_get(pListaLibros, i) != NULL){
+				libro_getId(aux, &idLibro);
+				libro_getTitulo(aux, titulo);
+				libro_getAutor(aux, autor);
+				libro_getPrecio(aux, &precio);
+				libro_getIdEditorial(aux, &idEditorial);
+				editorial_getEditorialNameById(pArrayListEditorial, idEditorial, editorial);
+				fprintf(pFile, "%d, %s, %s, %f, %s\n", idLibro, titulo, autor, precio, editorial);
+			}
+		}
+
+	}
+	fclose(pFile);
+}
+
+
 int parser_OneEditorialFromText(FILE* pFile)
 {
 	char idEditorial[128];

@@ -190,6 +190,42 @@ int libro_sortByAutor(void* firstBook, void* secondBook){
 	return result;
 }
 
+int libro_discountPlaneta(void* auxElement){
+	int result = -1;
+	eLibro* aux = auxElement;
+	if(aux->idEditorial == 1){
+		if(aux->precio >= 300){
+			aux->precio = aux->precio*0.8;
+			result = 0;
+		}
+	}
+	return result;
+}
+
+int libro_discountXXI(void* auxElement){
+	int result = -1;
+	eLibro* aux = auxElement;
+	if(aux->idEditorial == 2){
+		if(aux->precio <= 200){
+			aux->precio = aux->precio*0.9;
+			result = 0;
+		}
+	}
+	return result;
+}
+
+int libro_elementIsPlanetaOrXXI(void* auxElement){
+	int result = -1;
+	eLibro* aux = auxElement;
+	if(aux->idEditorial == 1){
+		libro_discountXXI(auxElement);
+		result = 1;
+	} else if(aux->idEditorial == 2){
+		libro_discountPlaneta(auxElement);
+		result = 2;
+	}
+	return result;
+}
 
 int libro_elementIsMinotauro(void* auxElement){
 	int result = -1;

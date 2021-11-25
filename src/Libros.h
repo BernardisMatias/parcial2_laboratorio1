@@ -28,4 +28,7 @@ int libro_getPrecio(eLibro* this,float* precio);
 int libro_sortList(LinkedList* pArrayBook, LinkedList* pArrayEditorial);
 int libro_sortByAutor(void* firstBook, void* secondBook);
 int libro_elementIsMinotauro(void* auxElement);
+int libro_elementIsPlanetaOrXXI(void* auxElement);
+int libro_discountXXI(void* auxElement);
+int libro_discountPlaneta(void* auxElement);
 #endif
